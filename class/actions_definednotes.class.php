@@ -76,8 +76,36 @@ class ActionsDefinedNotes
 		
 	}
 	
-	function doActions($parameters, &$object, &$action, $hookmanager)
+	function formobjectoptions($parameters, &$object, &$action, $hookmanager)
 	{
+		//var_dump($parameters,$object);
+		
+		if($action == 'create' && in_array('globalcard',explode(':',$parameters['context']))) {
+		
+			global $langs;
+			
+			$langs->load('definednotes@definednotes');
+			
+			$array=Array(1=>'test');
+			$form=new Form($this->db);
+			
+			echo '<tr><td>';
+				echo $langs->trans('PredefinedNotePublic');
+			echo '</td>';
+				
+				echo $form->selectarray('predefined_note_public', $array,0,1);
+			
+			echo '</tr>';
+
+			echo '<tr><td>';
+			echo $langs->trans('PredefinedNotePrivate');
+			echo '</td>';
+				echo $form->selectarray('predefined_note_private', $array,0,1);
+			
+			
+			echo '</tr>';
+			
+		}
 		
 	}
 }

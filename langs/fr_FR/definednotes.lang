@@ -41,3 +41,5 @@ ToClone=Cloner
 Delete=Supprimer
 
 PredefinedNotes=Notes prédéfinie
+PredefinedNotePrivate=Note privée prédéfinie (si vide)
+PredefinedNotePublic=Note publique prédéfinie (si vide)
