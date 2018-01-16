@@ -91,7 +91,8 @@ class modDefinedNotes extends DolibarrModules
 		//							'workflow' => array('WORKFLOW_MODULE1_YOURACTIONTYPE_MODULE2'=>array('enabled'=>'! empty($conf->module1->enabled) && ! empty($conf->module2->enabled)', 'picto'=>'yourpicto@definednotes')) // Set here all workflow context managed by module
 		//                        );
 		$this->module_parts = array(
-				'hooks'=>array('globalcard','admin')
+				'hooks'=>array('globalcard','admin'),
+				'triggers' => 1,        
 		);
 
 		// Data directories to create when module is enabled.

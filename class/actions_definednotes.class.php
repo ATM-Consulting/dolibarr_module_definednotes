@@ -80,32 +80,58 @@ class ActionsDefinedNotes
 	{
 		//var_dump($parameters,$object);
 		
-		if($action == 'create' && in_array('globalcard',explode(':',$parameters['context']))) {
+		
+		if($action == 'create'  
+				&& ($object->element == 'propal' || $object->element == 'commande' || $object->element == 'facture' || $object->element == 'shipping')
+				&& in_array('globalcard',explode(':',$parameters['context']))) {
 		
 			global $langs;
 			
 			$langs->load('definednotes@definednotes');
 			
-			$array=Array(1=>'test');
-			$form=new Form($this->db);
+			$array = $this->getArrayOfNote($object);
 			
-			echo '<tr><td>';
+			$form=new Form($object->db);
+			
+			if($object->element!='product') {
+			
+				echo '<tr><td>';
 				echo $langs->trans('PredefinedNotePublic');
-			echo '</td>';
-				
-				echo $form->selectarray('predefined_note_public', $array,0,1);
-			
-			echo '</tr>';
+				echo '</td><td>';
+				echo $form->selectarray('predefined_note_public', $array,GETPOST('predefined_note_public'),1);
+				echo '</td></tr>';
 
+			}
+			
 			echo '<tr><td>';
 			echo $langs->trans('PredefinedNotePrivate');
-			echo '</td>';
-				echo $form->selectarray('predefined_note_private', $array,0,1);
-			
-			
-			echo '</tr>';
+			echo '</td><td>';
+			echo $form->selectarray('predefined_note_private', $array,GETPOST('predefined_note_private'),1);
+			echo '</td></tr>';
 			
 		}
 		
 	}
+	
+	
+	function getArrayOfNote(&$object) {
+		global $conf;
+		$db = &$object->db;
+		//TODO restrict with object element
+		$Tab=array();
+		
+		$res = $db->query("SELECT rowid, label FROM ".MAIN_DB_PREFIX."c_predefinednotes WHERE active=1 AND entity=".$conf->entity);
+		if($res!==false) {
+			
+			while($obj = $db->fetch_object($res)) {
+				
+				$Tab[$obj->rowid] = $obj->label;
+				
+			}
+			
+		}
+		
+		return $Tab;
+	}
+	
 }
