@@ -62,7 +62,7 @@ class ActionsDefinedNotes
 	
 	function editDictionaryFieldlist($parameters, &$object, &$action, $hookmanager) {
 		
-		global $conf;
+		global $conf,$db, $langs;
 		
 	//	if(empty($conf->global->FCKEDITOR_ENABLE_SOCIETE)) return 0;
 		
@@ -72,6 +72,15 @@ class ActionsDefinedNotes
 		$doleditor = new DolEditor('content',$object->content); 
 		echo '<td>'.$doleditor->Create(1).'</td>';
 		
+		$form=new Form($db);
+		echo '<td>'.$form->selectarray('element',array(
+				'propal'=>$langs->trans('Proposal')
+				,'commande'=>$langs->trans('Order')
+				,'facture'=>$langs->trans('Invoice')
+				,'shipping'=>$langs->trans('Shipping')
+				
+		),$object->element).'</td>';
+		
 		return 1;
 		
 	}
@@ -79,7 +88,6 @@ class ActionsDefinedNotes
 	function formobjectoptions($parameters, &$object, &$action, $hookmanager)
 	{
 		//var_dump($parameters,$object);
-		
 		
 		if($action == 'create'  
 				&& ($object->element == 'propal' || $object->element == 'commande' || $object->element == 'facture' || $object->element == 'shipping')
@@ -90,6 +98,8 @@ class ActionsDefinedNotes
 			$langs->load('definednotes@definednotes');
 			
 			$array = $this->getArrayOfNote($object);
+			
+			if(empty($array)) return 0;
 			
 			$form=new Form($object->db);
 			
@@ -117,10 +127,9 @@ class ActionsDefinedNotes
 	function getArrayOfNote(&$object) {
 		global $conf;
 		$db = &$object->db;
-		//TODO restrict with object element
 		$Tab=array();
 		
-		$res = $db->query("SELECT rowid, label FROM ".MAIN_DB_PREFIX."c_predefinednotes WHERE active=1 AND entity=".$conf->entity);
+		$res = $db->query("SELECT rowid, label FROM ".MAIN_DB_PREFIX."c_predefinednotes WHERE active=1 AND entity=".$conf->entity." AND element='".$object->element."'");
 		if($res!==false) {
 			
 			while($obj = $db->fetch_object($res)) {
