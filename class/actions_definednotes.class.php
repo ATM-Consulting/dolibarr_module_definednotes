@@ -59,52 +59,63 @@ class ActionsDefinedNotes
 	 * @param   HookManager     $hookmanager    Hook manager propagated to allow calling another hook
 	 * @return  int                             < 0 on error, 0 on success, 1 to replace standard code
 	 */
-	
+
+	function createDictionaryFieldlist($parameters, &$object, &$action, $hookmanager) {
+
+		if(GETPOST('action')=='edit') {
+			echo '<td colspan="3"></td>';
+			return 1;
+		}
+
+		return $this->editDictionaryFieldlist($parameters, $object, $action, $hookmanager);
+
+	}
+
 	function editDictionaryFieldlist($parameters, &$object, &$action, $hookmanager) {
-		
+
 		global $conf,$db, $langs;
-		
+
 	//	if(empty($conf->global->FCKEDITOR_ENABLE_SOCIETE)) return 0;
-		
+
 		echo '<td><input class="flat quatrevingtpercent" value="'.htmlentities($object->label).'" name="label" type="text"></td>';
-		
+
 		dol_include_once('/core/class/doleditor.class.php');
-		$doleditor = new DolEditor('content',$object->content); 
+		$doleditor = new DolEditor('content',$object->content);
 		echo '<td>'.$doleditor->Create(1).'</td>';
-		
+
 		$form=new Form($db);
 		echo '<td>'.$form->selectarray('element',array(
 				'propal'=>$langs->trans('Proposal')
 				,'commande'=>$langs->trans('Order')
 				,'facture'=>$langs->trans('Invoice')
 				,'shipping'=>$langs->trans('Shipping')
-				
+
 		),$object->element).'</td>';
-		
+
 		return 1;
-		
+
 	}
-	
+
 	function formobjectoptions($parameters, &$object, &$action, $hookmanager)
 	{
 		//var_dump($parameters,$object);
-		
-		if($action == 'create'  
+
+		if($action == 'create'
 				&& ($object->element == 'propal' || $object->element == 'commande' || $object->element == 'facture' || $object->element == 'shipping')
 				&& in_array('globalcard',explode(':',$parameters['context']))) {
-		
+
 			global $langs;
-			
+
 			$langs->load('definednotes@definednotes');
-			
+
 			$array = $this->getArrayOfNote($object);
-			
+
 			if(empty($array)) return 0;
-			
+
 			$form=new Form($object->db);
-			
+
 			if($object->element!='product') {
-			
+
 				echo '<tr><td>';
 				echo $langs->trans('PredefinedNotePublic');
 				echo '</td><td>';
@@ -112,35 +123,35 @@ class ActionsDefinedNotes
 				echo '</td></tr>';
 
 			}
-			
+
 			echo '<tr><td>';
 			echo $langs->trans('PredefinedNotePrivate');
 			echo '</td><td>';
 			echo $form->selectarray('predefined_note_private', $array,GETPOST('predefined_note_private'),1);
 			echo '</td></tr>';
-			
+
 		}
-		
+
 	}
-	
-	
+
+
 	function getArrayOfNote(&$object) {
 		global $conf;
 		$db = &$object->db;
 		$Tab=array();
-		
+
 		$res = $db->query("SELECT rowid, label FROM ".MAIN_DB_PREFIX."c_predefinednotes WHERE active=1 AND entity=".$conf->entity." AND element='".$object->element."'");
 		if($res!==false) {
-			
+
 			while($obj = $db->fetch_object($res)) {
-				
+
 				$Tab[$obj->rowid] = $obj->label;
-				
+
 			}
-			
+
 		}
-		
+
 		return $Tab;
 	}
-	
+
 }
