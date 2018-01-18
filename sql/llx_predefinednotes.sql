@@ -8,7 +8,6 @@ CREATE TABLE llx_c_predefinednotes (
 	, active integer NOT NULL DEFAULT 1
 	, content mediumtext
 	, PRIMARY KEY (rowid)
-	, UNIQUE KEY uk_c_email_templates (entity,label)
 );
 
 ALTER TABLE llx_c_predefinednotes ADD element varchar(50) NULL;
