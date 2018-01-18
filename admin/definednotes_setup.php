@@ -34,7 +34,7 @@ require_once '../lib/definednotes.lib.php';
 
 // Translations
 $langs->load("definednotes@definednotes");
-
+$langs->load("admin");
 // Access control
 if (! $user->admin) {
     accessforbidden();
@@ -101,7 +101,7 @@ $var=false;
 
 echo $langs->trans('Home').' > '
 		.$langs->trans('Configuration').' > '
-				.'<a href="'.dol_buildpath('/admin/dict.php', 1).'">'.$langs->trans('Dictionaries').' </a> > '
+				.'<a href="'.dol_buildpath('/admin/dict.php', 1).'">'.$langs->trans('Dictionary').' </a> > '
 						.''.$langs->trans('PredefinedNotes').'';
 
 
