@@ -62,11 +62,13 @@ class ActionsDefinedNotes
 
 	function createDictionaryFieldlist($parameters, &$object, &$action, $hookmanager) {
 
+		if($parameters['tabname']!=MAIN_DB_PREFIX.'c_predefinednotes') return 0;
+		
 		if(GETPOST('action')=='edit') {
 			echo '<td colspan="3"></td>';
 			return 1;
 		}
-
+		
 		return $this->editDictionaryFieldlist($parameters, $object, $action, $hookmanager);
 
 	}
@@ -75,10 +77,9 @@ class ActionsDefinedNotes
 
 		global $conf,$db, $langs;
 
-	//	if(empty($conf->global->FCKEDITOR_ENABLE_SOCIETE)) return 0;
+		if($parameters['tabname']!=MAIN_DB_PREFIX.'c_predefinednotes') return 0;
 
 		echo '<td><input class="flat quatrevingtpercent" value="'.htmlentities($object->label).'" name="label" type="text"></td>';
-
 		dol_include_once('/core/class/doleditor.class.php');
 		$doleditor = new DolEditor('content',$object->content);
 		echo '<td>'.$doleditor->Create(1).'</td>';
@@ -98,8 +99,9 @@ class ActionsDefinedNotes
 
 	function formobjectoptions($parameters, &$object, &$action, $hookmanager)
 	{
-		//var_dump($parameters,$object);
 
+		if($parameters['tabname']!=MAIN_DB_PREFIX.'c_predefinednotes') return 0;
+		
 		if($action == 'create'
 				&& ($object->element == 'propal' || $object->element == 'commande' || $object->element == 'facture' || $object->element == 'shipping')
 				&& in_array('globalcard',explode(':',$parameters['context']))) {
