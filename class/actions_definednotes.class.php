@@ -81,7 +81,7 @@ class ActionsDefinedNotes
 
 		echo '<td><input class="flat quatrevingtpercent" value="'.htmlentities($object->label).'" name="label" type="text"></td>';
 		dol_include_once('/core/class/doleditor.class.php');
-		$doleditor = new DolEditor('content',$object->content);
+		$doleditor = new DolEditor('content',$object->content, '', 200, 'dolibarr_notes');
 		echo '<td>'.$doleditor->Create(1).'</td>';
 
 		$form=new Form($db);
@@ -99,9 +99,6 @@ class ActionsDefinedNotes
 
 	function formobjectoptions($parameters, &$object, &$action, $hookmanager)
 	{
-
-		if($parameters['tabname']!=MAIN_DB_PREFIX.'c_predefinednotes') return 0;
-		
 		if($action == 'create'
 				&& ($object->element == 'propal' || $object->element == 'commande' || $object->element == 'facture' || $object->element == 'shipping')
 				&& in_array('globalcard',explode(':',$parameters['context']))) {
