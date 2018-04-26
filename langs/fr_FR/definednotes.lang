@@ -17,6 +17,8 @@ DefinedNotesStatusValidated=Validée (à accepter)
 DefinedNotesStatusRefused=Refusée (fermée)
 DefinedNotesStatusAccepted=Acceptée (fermée)
 
+shipping= expédition
+
 Draft=Brouillon
 Validate=Validé
 Refused=Refusé
