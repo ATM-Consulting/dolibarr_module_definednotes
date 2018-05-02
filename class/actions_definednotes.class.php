@@ -86,7 +86,8 @@ class ActionsDefinedNotes
 
 		$form=new Form($db);
 		echo '<td>'.$form->selectarray('element',array(
-				'propal'=>$langs->trans('Proposal')
+				'all'=>$langs->trans('All')
+				,'propal'=>$langs->trans('Proposal')
 				,'commande'=>$langs->trans('Order')
 				,'facture'=>$langs->trans('Invoice')
 				,'shipping'=>$langs->trans('Shipping')
@@ -139,7 +140,7 @@ class ActionsDefinedNotes
 		$db = &$object->db;
 		$Tab=array();
 
-		$res = $db->query("SELECT rowid, label FROM ".MAIN_DB_PREFIX."c_predefinednotes WHERE active=1 AND entity=".$conf->entity." AND element='".$object->element."'");
+		$res = $db->query("SELECT rowid, label FROM ".MAIN_DB_PREFIX."c_predefinednotes WHERE active=1 AND entity=".$conf->entity." AND element IN ('".$object->element."','all')");
 		if($res!==false) {
 
 			while($obj = $db->fetch_object($res)) {
