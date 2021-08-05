@@ -106,7 +106,32 @@ class ActionsDefinedNotes
 
 			global $langs;
 
+			require_once DOL_DOCUMENT_ROOT . '/core/lib/functions.lib.php';
+
 			$langs->load('definednotes@definednotes');
+			$predefined_note_public_concat = GETPOST('predefined_note_public_concat');
+			$predefined_note_private_concat = GETPOST('predefined_note_private_concat');
+
+			?>
+			<script type="text/javascript">
+				$(document).ready(function() {
+					$("#predefined_note_public_concat").click(function() {
+						if($(this).prop('checked')) {
+							$("#predefined_public_note_langs").html("<?php print $langs->transnoentities('PredefinedNotePublic2'); ?>");
+						} else {
+							$("#predefined_public_note_langs").html("<?php print $langs->transnoentities('PredefinedNotePublic'); ?>");
+						}
+					});
+					$("#predefined_note_private_concat").click(function() {
+                                                if($(this).prop('checked')) {
+                                                        $("#predefined_private_note_langs").html("<?php print $langs->transnoentities('PredefinedNotePrivate2'); ?>");
+                                                } else {
+                                                        $("#predefined_private_note_langs").html("<?php print $langs->transnoentities('PredefinedNotePrivate'); ?>");
+                                                }
+                                        });
+				});
+			</script>
+			<?php
 
 			$array = $this->getArrayOfNote($object);
 
@@ -115,19 +140,27 @@ class ActionsDefinedNotes
 			$form=new Form($object->db);
 
 			if($object->element!='product') {
-
-				echo '<tr><td>';
-				echo $langs->trans('PredefinedNotePublic');
+//var_dump($predefined_note_public_concat);exit;
+				echo '<tr><td id="predefined_public_note_langs">';
+				if(!empty($predefined_note_public_concat)) echo $langs->trans('PredefinedNotePublic2');
+				else echo $langs->trans('PredefinedNotePublic');
 				echo '</td><td>';
-				echo $form->selectarray('predefined_note_public', $array,GETPOST('predefined_note_public'),1);
+				echo $form->selectarray('predefined_note_public', $array,GETPOST('predefined_note_public'),1).'&nbsp;'
+					.'<input type="checkbox" id="predefined_note_public_concat" name="predefined_note_public_concat" '
+					.(!empty($predefined_note_public_concat) ? 'checked="checked"' : '').' value="1" />'
+					.img_help(1, $langs->trans('DefinedNotesCheckboxConcatPublic'));
 				echo '</td></tr>';
 
 			}
 
-			echo '<tr><td>';
-			echo $langs->trans('PredefinedNotePrivate');
+			echo '<tr><td id="predefined_private_note_langs">';
+			if(!empty($predefined_note_private_concat)) echo $langs->trans('PredefinedNotePrivate2');
+			else echo $langs->trans('PredefinedNotePrivate');
 			echo '</td><td>';
-			echo $form->selectarray('predefined_note_private', $array,GETPOST('predefined_note_private'),1);
+			echo $form->selectarray('predefined_note_private', $array,GETPOST('predefined_note_private'),1).'&nbsp;'
+				.'<input type="checkbox" id="predefined_note_private_concat" name="predefined_note_private_concat" '
+				.(!empty($predefined_note_private_concat) ? 'checked="checked"' : '').' value="1" />'
+				.img_help(1, $langs->trans('DefinedNotesCheckboxConcatPrivate'));
 			echo '</td></tr>';
 
 		}
