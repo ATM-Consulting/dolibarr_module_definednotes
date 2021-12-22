@@ -64,7 +64,7 @@ class ActionsDefinedNotes
 
 		if($parameters['tabname']!=MAIN_DB_PREFIX.'c_predefinednotes') return 0;
 		
-		if(GETPOST('action')=='edit') {
+		if(GETPOST('action', 'alphanohtml')=='edit') {
 			echo '<td colspan="3"></td>';
 			return 1;
 		}
@@ -109,8 +109,8 @@ class ActionsDefinedNotes
 			require_once DOL_DOCUMENT_ROOT . '/core/lib/functions.lib.php';
 
 			$langs->load('definednotes@definednotes');
-			$predefined_note_public_concat = GETPOST('predefined_note_public_concat');
-			$predefined_note_private_concat = GETPOST('predefined_note_private_concat');
+			$predefined_note_public_concat = GETPOST('predefined_note_public_concat', 'alphanohtml');
+			$predefined_note_private_concat = GETPOST('predefined_note_private_concat', 'alphanohtml');
 
 			?>
 			<script type="text/javascript">
@@ -145,7 +145,7 @@ class ActionsDefinedNotes
 				if(!empty($predefined_note_public_concat)) echo $langs->trans('PredefinedNotePublic2');
 				else echo $langs->trans('PredefinedNotePublic');
 				echo '</td><td>';
-				echo $form->selectarray('predefined_note_public', $array,GETPOST('predefined_note_public'),1).'&nbsp;'
+				echo $form->selectarray('predefined_note_public', $array,GETPOST('predefined_note_public', 'int'),1).'&nbsp;'
 					.'<input type="checkbox" id="predefined_note_public_concat" name="predefined_note_public_concat" '
 					.(!empty($predefined_note_public_concat) ? 'checked="checked"' : '').' value="1" />'
 					.img_help(1, $langs->trans('DefinedNotesCheckboxConcatPublic'));
@@ -157,7 +157,7 @@ class ActionsDefinedNotes
 			if(!empty($predefined_note_private_concat)) echo $langs->trans('PredefinedNotePrivate2');
 			else echo $langs->trans('PredefinedNotePrivate');
 			echo '</td><td>';
-			echo $form->selectarray('predefined_note_private', $array,GETPOST('predefined_note_private'),1).'&nbsp;'
+			echo $form->selectarray('predefined_note_private', $array,GETPOST('predefined_note_private', 'int'),1).'&nbsp;'
 				.'<input type="checkbox" id="predefined_note_private_concat" name="predefined_note_private_concat" '
 				.(!empty($predefined_note_private_concat) ? 'checked="checked"' : '').' value="1" />'
 				.img_help(1, $langs->trans('DefinedNotesCheckboxConcatPrivate'));
