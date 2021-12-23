@@ -116,10 +116,10 @@ class InterfaceDefinedNotestrigger
     	
     	if($action == 'PROPAL_CREATE' || $action == 'BILL_CREATE' || $action == 'ORDER_CREATE' || $action == 'SHIPPING_CREATE') {
     		
-    		$id_note_public = GETPOST('predefined_note_public');
-    		$id_note_private = GETPOST('predefined_note_private');
-		$predefined_note_public_concat = GETPOST('predefined_note_public_concat');
-		$predefined_note_private_concat = GETPOST('predefined_note_private_concat');
+    		$id_note_public = GETPOST('predefined_note_public', 'int');
+    		$id_note_private = GETPOST('predefined_note_private', 'int');
+		$predefined_note_public_concat = GETPOST('predefined_note_public_concat', 'alphanohtml');
+		$predefined_note_private_concat = GETPOST('predefined_note_private_concat', 'alphanohtml');
 
     		if($id_note_public>0) {
     			
