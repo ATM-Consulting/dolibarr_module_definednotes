@@ -62,8 +62,9 @@ class ActionsDefinedNotes
 
 	function createDictionaryFieldlist($parameters, &$object, &$action, $hookmanager) {
 
-		if((floatval(DOL_VERSION) < 16 && $parameters['tabname']!=MAIN_DB_PREFIX.'c_predefinednotes') ||
-			(floatval(DOL_VERSION) >= 16 && $parameters['tabname']!='c_predefinednotes')) return 0;
+        $dictionnariesTablePrefix = '';
+		if(intval(DOL_VERSION) < 16) $dictionnariesTablePrefix = MAIN_DB_PREFIX;
+		if($parameters['tabname'] != $dictionnariesTablePrefix.'c_predefinednotes') return 0;
 		
 		if(GETPOST('action', 'alphanohtml')=='edit') {
 			echo '<td colspan="3"></td>';
@@ -78,8 +79,9 @@ class ActionsDefinedNotes
 
 		global $conf,$db, $langs;
 
-		if((floatval(DOL_VERSION) < 16 && $parameters['tabname']!=MAIN_DB_PREFIX.'c_predefinednotes') ||
-			(floatval(DOL_VERSION) >= 16 && $parameters['tabname']!='c_predefinednotes')) return 0;
+		 $dictionnariesTablePrefix = '';
+		if(intval(DOL_VERSION) < 16) $dictionnariesTablePrefix = MAIN_DB_PREFIX;
+		if($parameters['tabname'] != $dictionnariesTablePrefix.'c_predefinednotes') return 0;
 
 		echo '<td><input class="flat quatrevingtpercent" value="'.htmlentities($object->label).'" name="label" type="text"></td>';
 		dol_include_once('/core/class/doleditor.class.php');

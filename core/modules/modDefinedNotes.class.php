@@ -150,9 +150,11 @@ class modDefinedNotes extends DolibarrModules
         	$conf->definednotes=new stdClass();
         	$conf->definednotes->enabled=0;
         }
+		$dictionnariesTablePrefix = '';
+		if(intval(DOL_VERSION) < 16) $dictionnariesTablePrefix = MAIN_DB_PREFIX;
         $this->dictionaries=array(
         		'langs'=>'definednotes@definednotes',
-				'tabname' => (floatval(DOL_VERSION) >= 16 ? array("c_predefinednotes") : array(MAIN_DB_PREFIX."c_predefinednotes")),        // List of tables we want to see into dictonnary editor
+				'tabname' => array($dictionnariesTablePrefix."c_predefinednotes"),        // List of tables we want to see into dictonnary editor
         		'tablib'=>array("PredefinedNotes"),													// Label of tables
         		'tabsql'=>array('SELECT f.rowid as rowid, f.label, f.content,f.element, f.active FROM '.MAIN_DB_PREFIX.'c_predefinednotes as f'),	// Request to select fields
         		'tabsqlsort'=>array("label ASC"),																					// Sort order
