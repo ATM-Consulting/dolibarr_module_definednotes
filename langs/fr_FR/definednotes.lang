@@ -17,6 +17,8 @@ DefinedNotesStatusValidated=Validée (à accepter)
 DefinedNotesStatusRefused=Refusée (fermée)
 DefinedNotesStatusAccepted=Acceptée (fermée)
 
+shipping= expédition
+
 # Cases à cocher pour concaténer
 DefinedNotesCheckboxConcatPublic=Cochez cette case pour que la note publique prédéfinie soit concaténée à la note publique standard
 DefinedNotesCheckboxConcatPrivate=Cochez cette case pour que la note privée prédéfinie soit concaténée à la note privée standard
