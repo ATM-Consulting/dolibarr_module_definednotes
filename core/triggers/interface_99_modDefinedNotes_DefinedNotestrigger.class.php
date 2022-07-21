@@ -116,21 +116,33 @@ class InterfaceDefinedNotestrigger
     	
     	if($action == 'PROPAL_CREATE' || $action == 'BILL_CREATE' || $action == 'ORDER_CREATE' || $action == 'SHIPPING_CREATE') {
     		
-    		$id_note_public = GETPOST('predefined_note_public');
-    		$id_note_private = GETPOST('predefined_note_private');
-    		
-    		if(empty($object->note_public) && $id_note_public>0) {
+    		$id_note_public = GETPOST('predefined_note_public', 'int');
+    		$id_note_private = GETPOST('predefined_note_private', 'int');
+		$predefined_note_public_concat = GETPOST('predefined_note_public_concat', 'alphanohtml');
+		$predefined_note_private_concat = GETPOST('predefined_note_private_concat', 'alphanohtml');
+
+    		if($id_note_public>0) {
     			
     			$note = $this->getNote($id_note_public);
-    			
-    			$object->update_note($note,'_public');
+
+			
+    			if(!empty($predefined_note_public_concat) && !empty($object->note_public)) {
+				$note = $object->note_public.'<br />'.$note;
+			}
+
+			if(empty($object->note_public) || !empty($predefined_note_public_concat)) $object->update_note($note,'_public');
     			
     		}
     		
-    		if(empty($object->note_private) && $id_note_private>0) {
+    		if($id_note_private>0) {
     			
     			$note = $this->getNote($id_note_private);
-    			$object->update_note($note,'_private');
+
+                        if(!empty($predefined_note_private_concat) && !empty($object->note_private)) {
+                                $note = $object->note_private.'<br />'.$note;
+                        }
+
+    			if(empty($object->note_private) || !empty($predefined_note_private_concat)) $object->update_note($note,'_private');
     			
     		}
     		

@@ -17,6 +17,12 @@ DefinedNotesStatusValidated=Validée (à accepter)
 DefinedNotesStatusRefused=Refusée (fermée)
 DefinedNotesStatusAccepted=Acceptée (fermée)
 
+shipping= expédition
+
+# Cases à cocher pour concaténer
+DefinedNotesCheckboxConcatPublic=Cochez cette case pour que la note publique prédéfinie soit concaténée à la note publique standard
+DefinedNotesCheckboxConcatPrivate=Cochez cette case pour que la note privée prédéfinie soit concaténée à la note privée standard
+
 Draft=Brouillon
 Validate=Validé
 Refused=Refusé
@@ -43,3 +49,5 @@ Delete=Supprimer
 PredefinedNotes=Notes prédéfinies
 PredefinedNotePrivate=Note privée prédéfinie (si vide)
 PredefinedNotePublic=Note publique prédéfinie (si vide)
+PredefinedNotePrivate2=Note privée prédéfinie
+PredefinedNotePublic2=Note publique prédéfinie
