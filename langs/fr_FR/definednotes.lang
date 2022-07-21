@@ -6,10 +6,10 @@ ATMAbout = Ce module a été développé par <a href="http://www.atm-consulting.
 DefinedNotesSetup = Configuration du module DefinedNotes
 DefinedNotesAbout = A propos du module DefinedNotes
 
-DefinedNotes=DefinedNotes
+DefinedNotes = Notes prédéfinies
 
 # MENU
-TopMenuDefinedNotes=DefinedNotes
+TopMenuDefinedNotes = Notes prédéfinies
 
 # STATUS
 DefinedNotesStatusDraft=Brouillon (à valider)
@@ -29,12 +29,12 @@ Refused=Refusé
 Accepted=Accepté
 
 # LIST
-DefinedNotesList=Liste DefinedNotes
+DefinedNotesList=Liste des notes prédéfinies
 NoDefinedNotes=(vide)
 
 # CARD
-NewDefinedNotes=Création DefinedNotes
-DefinedNotesCard=Fiche DefinedNotes
+NewDefinedNotes=Création d'une note prédéfinie
+DefinedNotesCard=Fiche note prédéfinie
 
 # CARD TPL
 Save=Enregistrer
