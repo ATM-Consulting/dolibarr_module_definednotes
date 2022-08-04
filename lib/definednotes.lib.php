@@ -49,7 +49,7 @@ function definednotesAdminPrepareHead()
     //$this->tabs = array(
     //	'entity:-tabname:Title:@definednotes:/definednotes/mypage.php?id=__ID__'
     //); // to remove a tab
-    complete_head_from_modules($conf, $langs, $object, $head, $h, 'definednotes');
+    complete_head_from_modules($conf, $langs, new stdClass(), $head, $h, 'definednotes');
 
     return $head;
 }
