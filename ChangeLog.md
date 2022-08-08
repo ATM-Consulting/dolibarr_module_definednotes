@@ -6,6 +6,7 @@ ___
 
 # RELEASE 1.1 - 2021-08-05
 
+- FIX : PHP 8 *13/06/2022* - 1.1.4
 - FIX : Compat v16 *13/06/2022* - 1.1.3
 - FIX : module familly + icons *18/03/2022* - 1.1.2
 - FIX : Compat v13 *22/12/2021* - 1.1.1
