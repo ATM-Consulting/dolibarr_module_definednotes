@@ -4,6 +4,8 @@ ___
 
 ## Unreleased
 
+- NEW : Add predefined notes to supplier orders and invoices - *21/09/2022* - 1.2.0
+- 
 # RELEASE 1.1 - 2021-08-05
 
 - FIX : PHP 8 *13/06/2022* - 1.1.4

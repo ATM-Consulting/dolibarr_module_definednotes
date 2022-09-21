@@ -65,12 +65,12 @@ class ActionsDefinedNotes
         $dictionnariesTablePrefix = '';
 		if(intval(DOL_VERSION) < 16) $dictionnariesTablePrefix = MAIN_DB_PREFIX;
 		if($parameters['tabname'] != $dictionnariesTablePrefix.'c_predefinednotes') return 0;
-		
+
 		if(GETPOST('action', 'alphanohtml')=='edit') {
 			echo '<td colspan="3"></td>';
 			return 1;
 		}
-		
+
 		return $this->editDictionaryFieldlist($parameters, $object, $action, $hookmanager);
 
 	}
@@ -95,6 +95,8 @@ class ActionsDefinedNotes
 				,'commande'=>$langs->trans('Order')
 				,'facture'=>$langs->trans('Invoice')
 				,'shipping'=>$langs->trans('Shipping')
+				,'order_supplier'=>$langs->trans('OrdersSuppliers')
+				,'invoice_supplier'=>$langs->trans('BillsSuppliers')
 
 		),(!empty($object->element)?$object->element:'')).'</td>';
 
@@ -105,7 +107,7 @@ class ActionsDefinedNotes
 	function formobjectoptions($parameters, &$object, &$action, $hookmanager)
 	{
 		if($action == 'create'
-				&& ($object->element == 'propal' || $object->element == 'commande' || $object->element == 'facture' || $object->element == 'shipping')
+				&& ($object->element == 'propal' || $object->element == 'commande' || $object->element == 'facture' || $object->element == 'shipping' || $object->element == 'order_supplier'|| $object->element == 'invoice_supplier')
 				&& in_array('globalcard',explode(':',$parameters['context']))) {
 
 			global $langs;
