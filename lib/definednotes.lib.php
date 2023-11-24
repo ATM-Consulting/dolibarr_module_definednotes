@@ -85,17 +85,17 @@ function getFormConfirmDefinedNotes(&$PDOdb, &$form, &$object, $action)
 
     $formconfirm = '';
 
-    if ($action == 'validate' && !empty($user->rights->definednotes->write))
+    if ($action == 'validate' && !empty($user->hasRight('rights', 'definednotes', 'write')))
     {
         $text = $langs->trans('ConfirmValidateDefinedNotes', $object->ref);
         $formconfirm = $form->formconfirm($_SERVER['PHP_SELF'] . '?id=' . $object->id, $langs->trans('ValidateDefinedNotes'), $text, 'confirm_validate', '', 0, 1);
     }
-    elseif ($action == 'delete' && !empty($user->rights->definednotes->write))
+    elseif ($action == 'delete' && !empty($user->hasRight('rights', 'definednotes', 'write')))
     {
         $text = $langs->trans('ConfirmDeleteDefinedNotes');
         $formconfirm = $form->formconfirm($_SERVER['PHP_SELF'] . '?id=' . $object->id, $langs->trans('DeleteDefinedNotes'), $text, 'confirm_delete', '', 0, 1);
     }
-    elseif ($action == 'clone' && !empty($user->rights->definednotes->write))
+    elseif ($action == 'clone' && !empty($user->hasRight('rights', 'definednotes', 'write')))
     {
         $text = $langs->trans('ConfirmCloneDefinedNotes', $object->ref);
         $formconfirm = $form->formconfirm($_SERVER['PHP_SELF'] . '?id=' . $object->id, $langs->trans('CloneDefinedNotes'), $text, 'confirm_clone', '', 0, 1);
