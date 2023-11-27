@@ -23,10 +23,12 @@
  *          Put some comments here
  */
 
+require_once __DIR__ . '/../backport/v19/core/class/commonhookactions.class.php';
+
 /**
  * Class ActionsDefinedNotes
  */
-class ActionsDefinedNotes
+class ActionsDefinedNotes extends \definednotes\RetroCompatCommonHookActions
 {
 	/**
 	 * @var array Hook results. Propagated to $hookmanager->resArray for later reuse

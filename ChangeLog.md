@@ -4,6 +4,10 @@ ___
 
 ## Unreleased
 
+# RELEASE 1.2 - 2023-11-24
+
+- FIX : compat v16 php8.2 *24/11/2023* - 1.2
+
 # RELEASE 1.1 - 2021-08-05
 
 - FIX : PHP 8 *13/06/2022* - 1.1.4
