@@ -2,13 +2,15 @@
 All notable changes to this project will be documented in this file.
 ___
 
-## Unreleased
+## [UNRELEASED]
 
-# RELEASE 1.2 - 2023-11-24
 
-- FIX : compat v16 php8.2 *24/11/2023* - 1.2
 
-# RELEASE 1.1 - 2021-08-05
+## RELEASE 1.2
+
+- FIX : compat v19 php8.2 *24/11/2023* - 1.2
+
+## RELEASE 1.1
 
 - FIX : PHP 8 *13/06/2022* - 1.1.4
 - FIX : Compat v16 *13/06/2022* - 1.1.3
