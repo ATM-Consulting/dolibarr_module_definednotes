@@ -4,7 +4,7 @@ ___
 
 ## [UNRELEASED]
 
-
+- NEW : COMPATV21 - *06/12/2024* - 1.3  
 
 ## RELEASE 1.2
 
