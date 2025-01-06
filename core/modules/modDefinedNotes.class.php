@@ -46,7 +46,7 @@ class modDefinedNotes extends DolibarrModules
 
 		$this->editor_name = 'ATM Consulting';
 		$this->editor_url = 'https://www.atm-consulting.fr';
-		
+
 		// Id for module (must be unique).
 		// Use here a free id (See in Home -> System information -> Dolibarr for list of used modules id).
 		$this->numero = 104056; // 104000 to 104999 for ATM CONSULTING
@@ -70,7 +70,7 @@ class modDefinedNotes extends DolibarrModules
 		// If file is in theme/yourtheme/img directory under name object_pictovalue.png, use this->picto='pictovalue'
 		// If file is in module/img directory under name object_pictovalue.png, use this->picto='pictovalue@module'
 		$this->picto='definednotes.svg@definednotes';
-		
+
 		// Defined all module parts (triggers, login, substitutions, menus, css, etc...)
 		// for default path (eg: /definednotes/core/xxxxx) (0=disable, 1=enable)
 		// for specific path of parts (eg: /definednotes/core/modules/barcode)
@@ -92,7 +92,7 @@ class modDefinedNotes extends DolibarrModules
 		//                        );
 		$this->module_parts = array(
 				'hooks'=>array('globalcard','admin'),
-				'triggers' => 1,        
+				'triggers' => 1,
 		);
 
 		// Data directories to create when module is enabled.
@@ -145,10 +145,10 @@ class modDefinedNotes extends DolibarrModules
         $this->tabs = array();
 
         // Dictionaries
-	    if (! isset($conf->definednotes->enabled))
+	    if (isModEnabled('definednotes'))
         {
         	$conf->definednotes=new stdClass();
-        	$conf->definednotes->enabled=0;
+        	$conf->definednotes->enabled = 0;
         }
 		$dictionnariesTablePrefix = '';
 		if(intval(DOL_VERSION) < 16) $dictionnariesTablePrefix = MAIN_DB_PREFIX;
@@ -162,8 +162,8 @@ class modDefinedNotes extends DolibarrModules
         		'tabfieldvalue'=>array("label,content,element"),																				// List of fields (list of fields to edit a record)
         		'tabfieldinsert'=>array("label,content,element"),																			// List of fields (list of fields for insert)
         		'tabrowid'=>array("rowid"),																									// Name of columns with primary key (try to always name it 'rowid')
-        		'tabcond'=>array($conf->definednotes->enabled)												// Condition to show each dictionary
-        );
+				'tabcond'=>array(isModEnabled("definednotes"))
+		);
 
         // Boxes
 		// Add here list of php file(s) stored in core/boxes that contains class to show a box.
@@ -190,7 +190,7 @@ class modDefinedNotes extends DolibarrModules
 		$this->rights[$r][4] = 'read';				// In php code, permission will be checked by test if ($user->rights->permkey->level1->level2)
 		$this->rights[$r][5] = '';				// In php code, permission will be checked by test if ($user->rights->permkey->level1->level2)
 		$r++;
-		
+
 		$this->rights[$r][0] = $this->numero . $r;	// Permission id (must not be already used)
 		$this->rights[$r][1] = 'definednotes_write';	// Permission label
 		$this->rights[$r][3] = 1; 					// Permission by default for new user (0/1)
@@ -234,9 +234,9 @@ class modDefinedNotes extends DolibarrModules
 		//							'target'=>'',
 		//							'user'=>2);				                // 0=Menu for internal users, 1=external users, 2=both
 		// $r++;
-		
+
 /*
-		$this->menu[$r]=array(	
+		$this->menu[$r]=array(
 			'fk_menu'=>0,			                // Put 0 if this is a top menu
 			'type'=>'top',			                // This is a Top menu entry
 			'titre'=>$langs->trans('TopMenuDefinedNotes'),
@@ -267,7 +267,7 @@ class modDefinedNotes extends DolibarrModules
 			'user'=>2
 		);
 		$r++;
-		
+
 		$this->menu[$r]=array(
 			'fk_menu'=>'fk_mainmenu=definednotes,fk_leftmenu=definednotes_left',		    // Use 'fk_mainmenu=xxx' or 'fk_mainmenu=xxx,fk_leftmenu=yyy' where xxx is mainmenucode and yyy is a leftmenucode
 			'type'=>'left',			                // This is a Left menu entry
@@ -283,7 +283,7 @@ class modDefinedNotes extends DolibarrModules
 			'user'=>2
 		);				                // 0=Menu for internal users, 1=external users, 2=both
 		$r++;
-		
+
 
 		$this->menu[$r]=array(
 			'fk_menu'=>'fk_mainmenu=definednotes,fk_leftmenu=definednotes_left',		    // Use 'fk_mainmenu=xxx' or 'fk_mainmenu=xxx,fk_leftmenu=yyy' where xxx is mainmenucode and yyy is a leftmenucode
@@ -301,7 +301,7 @@ class modDefinedNotes extends DolibarrModules
 		);				                // 0=Menu for internal users, 1=external users, 2=both
 		$r++;
 */
-		
+
 		// Exports
 		$r=1;
 
@@ -331,7 +331,7 @@ class modDefinedNotes extends DolibarrModules
 	function init($options='')
 	{
 		$sql = array();
-		
+
 		define('INC_FROM_DOLIBARR',true);
 
 		dol_include_once('/definednotes/config.php');
