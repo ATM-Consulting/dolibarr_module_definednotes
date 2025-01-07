@@ -162,7 +162,7 @@ class modDefinedNotes extends DolibarrModules
         		'tabfieldvalue'=>array("label,content,element"),																				// List of fields (list of fields to edit a record)
         		'tabfieldinsert'=>array("label,content,element"),																			// List of fields (list of fields for insert)
         		'tabrowid'=>array("rowid"),																									// Name of columns with primary key (try to always name it 'rowid')
-				'tabcond'=>array('"' . isModEnabled("definednotes"). '"')
+				'tabcond'=>array('isModEnabled("definednotes")')
 		);
 
         // Boxes
