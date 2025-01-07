@@ -7,7 +7,7 @@ ___
 
 
 ## RELEASE 1.2
-
+- FIX : COMPATV21 - *06/01/2025* - 1.2.1   
 - FIX : compat v19 php8.2 *24/11/2023* - 1.2
 
 ## RELEASE 1.1
