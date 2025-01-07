@@ -145,7 +145,7 @@ class modDefinedNotes extends DolibarrModules
         $this->tabs = array();
 
         // Dictionaries
-	    if (isModEnabled('definednotes'))
+	    if (!isModEnabled('definednotes'))
         {
         	$conf->definednotes=new stdClass();
         	$conf->definednotes->enabled = 0;
