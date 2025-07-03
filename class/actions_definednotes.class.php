@@ -31,7 +31,7 @@ require_once __DIR__ . '/../backport/v19/core/class/commonhookactions.class.php'
 class ActionsDefinedNotes extends \definednotes\RetroCompatCommonHookActions
 {
 	/**
-	 * @var array Hook results. Propagated to $hookmanager->resArray for later reuse
+	 * @var array Hook results. Propagated to $this->results for later reuse
 	 */
 	public $results = array();
 
@@ -64,15 +64,14 @@ class ActionsDefinedNotes extends \definednotes\RetroCompatCommonHookActions
 
 	function createDictionaryFieldlist($parameters, &$object, &$action, $hookmanager) {
 
-        $dictionnariesTablePrefix = '';
-		if(intval(DOL_VERSION) < 16) $dictionnariesTablePrefix = MAIN_DB_PREFIX;
-		if($parameters['tabname'] != $dictionnariesTablePrefix.'c_predefinednotes') return 0;
-		
+		global $db;
+		if($parameters['tabname'] != $db->prefix().'c_predefinednotes') return 0;
+
 		if(GETPOST('action', 'alphanohtml')=='edit') {
 			echo '<td colspan="3"></td>';
 			return 1;
 		}
-		
+
 		return $this->editDictionaryFieldlist($parameters, $object, $action, $hookmanager);
 
 	}
@@ -81,9 +80,8 @@ class ActionsDefinedNotes extends \definednotes\RetroCompatCommonHookActions
 
 		global $conf,$db, $langs;
 
-		 $dictionnariesTablePrefix = '';
-		if(intval(DOL_VERSION) < 16) $dictionnariesTablePrefix = MAIN_DB_PREFIX;
-		if($parameters['tabname'] != $dictionnariesTablePrefix.'c_predefinednotes') return 0;
+
+		if($parameters['tabname'] != $db->prefix().'c_predefinednotes') return 0;
 
 		echo '<td><input class="flat quatrevingtpercent" value="'.htmlentities((!empty($object->label)?$object->label:'')).'" name="label" type="text"></td>';
 		dol_include_once('/core/class/doleditor.class.php');
@@ -179,7 +177,7 @@ class ActionsDefinedNotes extends \definednotes\RetroCompatCommonHookActions
 		$db = &$object->db;
 		$Tab=array();
 
-		$res = $db->query("SELECT rowid, label FROM ".MAIN_DB_PREFIX."c_predefinednotes WHERE active=1 AND entity=".$conf->entity." AND element IN ('".$object->element."','all')");
+		$res = $db->query("SELECT rowid, label FROM ".$db->prefix()."c_predefinednotes WHERE active=1 AND entity=".$conf->entity." AND element IN ('".$object->element."','all')");
 		if($res!==false) {
 
 			while($obj = $db->fetch_object($res)) {
