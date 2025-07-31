@@ -3,7 +3,7 @@ All notable changes to this project will be documented in this file.
 ___
 
 ## [UNRELEASED]
-- FIX : COMPATV22 - *03/02/2025* - 1.3.0
+- NEW : COMPATV22 - *03/02/2025* - 1.3.0
 
 
 
