@@ -3,11 +3,11 @@ All notable changes to this project will be documented in this file.
 ___
 
 ## [UNRELEASED]
+- FIX : COMPATV22 - *03/02/2025* - 1.3.0
 
 
 
 ## RELEASE 1.2
-- FIX : COMPATV22 - *03/02/2025* - 1.2.2  
 - FIX : COMPATV21 - *06/01/2025* - 1.2.1   
 - FIX : compat v19 php8.2 *24/11/2023* - 1.2
 
