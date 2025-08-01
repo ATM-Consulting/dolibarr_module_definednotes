@@ -113,29 +113,29 @@ class InterfaceDefinedNotestrigger
      */
     public function run_trigger($action, $object, $user, $langs, $conf)
     {
-    	
+
     	if($action == 'PROPAL_CREATE' || $action == 'BILL_CREATE' || $action == 'ORDER_CREATE' || $action == 'SHIPPING_CREATE') {
-    		
+
     		$id_note_public = GETPOST('predefined_note_public', 'int');
     		$id_note_private = GETPOST('predefined_note_private', 'int');
 		$predefined_note_public_concat = GETPOST('predefined_note_public_concat', 'alphanohtml');
 		$predefined_note_private_concat = GETPOST('predefined_note_private_concat', 'alphanohtml');
 
     		if($id_note_public>0) {
-    			
+
     			$note = $this->getNote($id_note_public);
 
-			
+
     			if(!empty($predefined_note_public_concat) && !empty($object->note_public)) {
 				$note = $object->note_public.'<br />'.$note;
 			}
 
 			if(empty($object->note_public) || !empty($predefined_note_public_concat)) $object->update_note($note,'_public');
-    			
+
     		}
-    		
+
     		if($id_note_private>0) {
-    			
+
     			$note = $this->getNote($id_note_private);
 
                         if(!empty($predefined_note_private_concat) && !empty($object->note_private)) {
@@ -143,25 +143,25 @@ class InterfaceDefinedNotestrigger
                         }
 
     			if(empty($object->note_private) || !empty($predefined_note_private_concat)) $object->update_note($note,'_private');
-    			
+
     		}
-    		
-    		
+
+
     	}
 
         return 0;
     }
-    
+
     function getNote($id) {
     	global $db;
-    	
-    	$res = $db->query("SELECT content FROM ".MAIN_DB_PREFIX."c_predefinednotes WHERE rowid=".$id);
+
+    	$res = $db->query("SELECT content FROM ".$db->prefix()."c_predefinednotes WHERE rowid=".intval($id));
     	if($res!==false) {
     		$obj = $db->fetch_object($res);
     		return $obj->content;
     	}
-    	
+
     	return false;
     }
-    
+
 }

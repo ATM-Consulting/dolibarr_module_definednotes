@@ -3,6 +3,7 @@ All notable changes to this project will be documented in this file.
 ___
 
 ## [UNRELEASED]
+- NEW : COMPATV22 - dolibarr compatibility to 16.0  - *03/02/2025* - 1.3.0
 
 
 

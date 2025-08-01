@@ -61,7 +61,7 @@ class modDefinedNotes extends DolibarrModules
 		// Module description, used if translation string 'ModuleXXXDesc' not found (where XXX is value of numeric property 'numero' of module)
 		$this->description = "Description of module DefinedNotes";
 		// Possible values for version are: 'development', 'experimental', 'dolibarr' or version
-		$this->version = '1.2.1';
+		$this->version = '1.3.0';
 		// Key used in llx_const table to save module status enabled/disabled (where MYMODULE is value of property name of module in uppercase)
 		$this->const_name = 'MAIN_MODULE_'.strtoupper($this->name);
 		// Where to store the module in setup page (0=common,1=interface,2=others,3=very specific)
@@ -108,7 +108,7 @@ class modDefinedNotes extends DolibarrModules
 		$this->requiredby = array();	// List of modules id to disable if this one is disabled
 		$this->conflictwith = array();	// List of modules id this module is in conflict with
 		$this->phpmin = array(5,0);					// Minimum version of PHP required by module
-		$this->need_dolibarr_version = array(3,0);	// Minimum version of Dolibarr required by module
+		$this->need_dolibarr_version = array(16,0);	// Minimum version of Dolibarr required by module
 		$this->langfiles = array("definednotes@definednotes");
 
 		// Constants
@@ -150,11 +150,9 @@ class modDefinedNotes extends DolibarrModules
         	$conf->definednotes=new stdClass();
         	$conf->definednotes->enabled = 0;
         }
-		$dictionnariesTablePrefix = '';
-		if(intval(DOL_VERSION) < 16) $dictionnariesTablePrefix = $this->db->prefix();
         $this->dictionaries=array(
         		'langs'=>'definednotes@definednotes',
-				'tabname' => array($dictionnariesTablePrefix."c_predefinednotes"),        // List of tables we want to see into dictonnary editor
+				'tabname' => array($this->db->prefix()."c_predefinednotes"),        // List of tables we want to see into dictonnary editor
         		'tablib'=>array("PredefinedNotes"),													// Label of tables
         		'tabsql'=>array('SELECT f.rowid as rowid, f.label, f.content,f.element, f.active FROM '.$this->db->prefix().'c_predefinednotes as f'),	// Request to select fields
         		'tabsqlsort'=>array("label ASC"),																					// Sort order
