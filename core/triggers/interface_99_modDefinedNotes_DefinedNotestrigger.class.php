@@ -155,7 +155,7 @@ class InterfaceDefinedNotestrigger
     function getNote($id) {
     	global $db;
 
-    	$res = $db->query("SELECT content FROM ".$db->prefix()."c_predefinednotes WHERE rowid=".$id);
+    	$res = $db->query("SELECT content FROM ".$db->prefix()."c_predefinednotes WHERE rowid=".intval($id));
     	if($res!==false) {
     		$obj = $db->fetch_object($res);
     		return $obj->content;

@@ -177,7 +177,7 @@ class ActionsDefinedNotes extends \definednotes\RetroCompatCommonHookActions
 		$db = &$object->db;
 		$Tab=array();
 
-		$res = $db->query("SELECT rowid, label FROM ".$db->prefix()."c_predefinednotes WHERE active=1 AND entity=".$conf->entity." AND element IN ('".$object->element."','all')");
+		$res = $db->query("SELECT rowid, label FROM ".$db->prefix()."c_predefinednotes WHERE active=1 AND entity=".$conf->entity." AND element IN ('".$db->escape($object->element) ."','all')");
 		if($res!==false) {
 
 			while($obj = $db->fetch_object($res)) {
